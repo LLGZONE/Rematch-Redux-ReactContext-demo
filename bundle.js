@@ -9,6 +9,7 @@ const argv = require('yargs')
   })
   .parse();
 
+console.log('project:', argv.p, 'type:', argv.t);
 const path = `${argv.p}/${argv.t}`;
 const content = fs.readFileSync('./index.html', 'utf-8');
 fs.writeFileSync(
