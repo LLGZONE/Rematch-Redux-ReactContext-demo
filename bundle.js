@@ -13,7 +13,7 @@ console.log('project:', argv.p, 'type:', argv.t);
 const path = `${argv.p}/${argv.t}`;
 const content = fs.readFileSync('./index.html', 'utf-8');
 const data = content.replace(
-  /(src=")(.*)(\/App\.js")/g,
+  /(src=")(.*)(\/index\.js")/g,
   (match, p1, p2, p3) => {
     return [p1, path, p3].join('');
   }

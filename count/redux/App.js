@@ -1,12 +1,9 @@
 import * as React from 'react';
-import { render } from 'react-dom';
-import store from './store';
 import { add, reduce, reset } from './action';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
 class Counter extends React.Component {
   handleClick(type) {
-    console.log(this.props, type);
     this.props[type]();
   }
 
@@ -37,9 +34,4 @@ const App = connect(
   }
 )(Counter);
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+export default App;

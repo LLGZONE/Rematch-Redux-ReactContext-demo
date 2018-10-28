@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-dom';
-import store from './store';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
 class Counter extends React.Component {
   handleClick(type) {
@@ -37,9 +35,4 @@ const App = connect(
   mapDispatchToProps
 )(Counter);
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+export default App;
