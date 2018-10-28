@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Bundler = require('parcel-bundler');
 const Path = require('path');
+const rf = require('rimraf');
 
 const argv = require('yargs')
   .alias({
@@ -21,9 +22,12 @@ const data = content.replace(
 fs.writeFileSync('./index.html', data);
 const entryFiles = Path.join(__dirname, './index.html');
 const bundler = new Bundler(entryFiles);
-bundler.bundle();
+rf('./dist', () => {
+  bundler.bundle();
+  bundler.serve();
+});
+
 bundler.on('buildError', err => {
   console.error(err);
   process.exit(-1);
 });
-bundler.serve();
