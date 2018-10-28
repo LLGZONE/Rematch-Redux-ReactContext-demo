@@ -12,13 +12,18 @@ const argv = require('yargs')
 console.log('project:', argv.p, 'type:', argv.t);
 const path = `${argv.p}/${argv.t}`;
 const content = fs.readFileSync('./index.html', 'utf-8');
-fs.writeFileSync(
-  './index.html',
-  content.replace(/(src=")(.*)(\/App\.js")$/g, (match, p1, p2, p3) => {
+const data = content.replace(
+  /(src=")(.*)(\/App\.js")/g,
+  (match, p1, p2, p3) => {
     return [p1, path, p3].join('');
-  })
+  }
 );
+fs.writeFileSync('./index.html', data);
 const entryFiles = Path.join(__dirname, './index.html');
-const bundler = new Bundler(entryFiles, entryFiles);
+const bundler = new Bundler(entryFiles);
 bundler.bundle();
-bundler.serve(1234);
+bundler.on('buildError', err => {
+  console.error(err);
+  process.exit(-1);
+});
+bundler.serve();

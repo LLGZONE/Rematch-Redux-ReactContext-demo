@@ -27,9 +27,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  add: dispath.count.add,
-  reduce: dispatch.count.reduce,
-  reset: dispath.count.reset
+  add: () => dispatch.count.add(1),
+  reduce: () => dispatch.count.reduce(1),
+  reset: dispatch.count.reset
 });
 
 const App = connect(
